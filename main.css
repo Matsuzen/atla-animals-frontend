@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+
+body {
+  background-image: url("korra-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Indie Flower', cursive;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.btn-main {
+  background: #0A56B6;
+  color: white;
+  cursor: pointer;
+  padding: 2px 12px;
+}
+
+.daily-container {
+  /* border-radius: 16px; */
+  margin: 4rem 0;
+  width: 100%;
+}
+
+.daily-animal {
+  /* border: 4px solid #0A56B6; */
+  /* border-radius: 16px; */
+  box-shadow: 0 10px 10px 10px rgba(10, 88, 184, 0.3);
+  width: 100%;
+}
+
+.daily-animal-name {
+  font-size: 3rem;
+}
+
+.daily-date {
+  border-top: 2px solid #0A56B6;
+  padding-top: 8px;
+}
+
+.daily-info {
+  font-size: 2.4rem;
+  text-align: center;
+  width: 100%;
+}
+
+.daily-rating {
+  display: flex;
+  font-size: 2.4rem;
+  justify-content: space-around;
+  margin-top: 24px;
+  width: 80%;
+}
+
+.main {
+  align-items: center;
+  background: rgba(10, 87, 182, 0.15);
+  display: flex;
+  flex-direction: column;;
+  margin: auto;
+  padding: 10px;
+  width: 560px;
+}
+
+.main header {
+  font-size: 3.2rem;
+  margin: 4rem 0;
+}
+
+.site-desc {
+  font-size: 2.4rem;
+}
+
+.underline {
+  border-bottom: 2px solid #0A56B6;
+}
