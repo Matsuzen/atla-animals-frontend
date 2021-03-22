@@ -6,8 +6,12 @@ const app = new Vue({
   el: "#app",
   data: {
     daily: {
+      selectedTier: "4",
       hasVoted: false,
-      selectedTier: "4"
+      date: "",
+      name: "",
+      tier: "",
+      imgSrc: ""
     },
   },
   methods: {
@@ -16,6 +20,7 @@ const app = new Vue({
   mounted: function() {
     fetchDailyInfo()
     .then(function(res) { updateDaily(res, app); })
+    .catch(function(err) { console.log(err) })
   }
 });
 
