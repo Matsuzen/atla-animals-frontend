@@ -1,79 +1,64 @@
-const baseUrl = "https://atla-animals.herokuapp.com/";
+const baseUrl = /* "http://localhost:3000/" */"https://atla-animals.herokuapp.com/";
 
 axios.defaults.baseURL = baseUrl;
 
-const voteButton = document.querySelector(".vote-btn");
-const ratingSelector = document.querySelector(".rating-selector");
-
-const dailyTier = document.querySelector(".animal-tier");
-
-voteButton.addEventListener("click", vote);
-
-//Get daily animal info
-fetchDailyInfo();
+const app = new Vue({
+  el: "#app",
+  data: {
+    daily: {
+      hasVoted: false,
+      selectedTier: "4"
+    },
+  },
+  methods: {
+    vote: function() { vote(app) }
+  },
+  mounted: function() {
+    fetchDailyInfo()
+    .then(function(res) { updateDaily(res, app); })
+  }
+});
 
 function fetchDailyInfo() {
-  axios.get("animal/daily")
-  .then(updateDaily)
-  .catch(function(e) {
-    console.log(e)
-  })
+  return axios.get("animal/daily");
 }
 
-function updateDaily(res) {
-  console.log(res.data);
-  const dailyImg = document.querySelector(".daily-container img");
-  const dailyDate = document.querySelector(".daily-date");
-  const dailyName = document.querySelector(".daily-animal-name span");
-
+function updateDaily(res, app) {
   const data = res.data;
 
   const animalName = data.name.replace(/^\D| \D/g, function(match) {
     return match.toUpperCase();
   })
-
-  const values = [
-    data.date,
-    animalName,
-    data.tier || "No"
-  ]
-
-  const els = [dailyDate, dailyName, dailyTier];
-
-  dailyImg.src = baseUrl + "animals/" + data.name + ".png";
-
-  els.forEach(function(el, i) {
-    el.textContent = values[i];
-  });
-
-  if(data.hasVoted) {
-    updateVoteBtn();
+  
+  const daily = {
+    date: data.date,
+    name: animalName,
+    tier: data.tier || "No",
+    hasVoted: data.hasVoted,
+    imgSrc: baseUrl + "animals/" + data.name + ".png"
   }
+
+  for(const prop in daily) {
+    app.daily[prop] = daily[prop];
+  }
+
 }
 
-function vote() {
+function vote(app = app) {
   axios.post("animal/vote", {
-    answer: parseInt(ratingSelector.value)
+    answer: parseInt(app.daily.selectedTier)
   })
-  .then(updateVote)
+  .then(function(res) { updateVote(res, app) })
   .catch(function(e) {
     console.log(e)
   })
 }
 
 function updateVote(res) {
-  console.log(res.data)
-
   if(res.err) {
     return;
   }
-  updateVoteBtn();
-  dailyTier.textContent = res.data.newRating
-}
 
-function updateVoteBtn() {
-  voteButton.textContent = "Voted!";
-  voteButton.removeEventListener("click", vote);
-
-  ratingSelector.style.display = "none";
+  app.hasVoted = true;
+  app.tier = res.data.newRating;
 }

@@ -6,12 +6,13 @@
   <title>ATLA Animals</title>
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 </head>
 <body>  
 
   <!-- main container -->
-  <div class="main">
+  <div id="app" class="main">
 
     <header class="underline">ATLA Animals</header>
 
@@ -22,32 +23,45 @@
     </div>
 
     <div class="daily-container">
-      <img 
-        src=""
+      <img
+        :src="daily.imgSrc"
         alt="Avatar Animal"
         class="daily-animal">
     </div>
 
     <div class="daily-info">
-      <div class="daily-date">
-        
+      <div 
+        class="daily-date">
+        {{ daily.date }}
       </div>
 
       <div class="daily-animal-name">
-        <span class="bold underline"></span>
+        <span 
+          class="bold underline"
+          >
+          {{ daily.name }}
+        </span>
       </div>
     </div>
 
     <div class="daily-rating">
       <div>
         <span>Daily Rating:</span>
-        <span class="animal-tier bold"></span> tier
+        <span 
+          class="animal-tier bold"
+          >
+          {{ daily.tier }}
+        </span> tier
       </div>
 
-      <div>
-        <span class="vote-btn btn-main">Vote</span>
-        <select class="rating-selector" name="animal-rating">
-          <option value="4">S</option>
+      <div v-show="!daily.hasVoted">
+        <span 
+          class="vote-btn btn-main"
+          @click="vote">
+          Vote
+        </span>
+        <select v-model="daily.selectedTier" class="rating-selector" name="animal-rating">
+          <option value="4" selected >S</option>
           <option value="3">A</option>
           <option value="2">B</option>
           <option value="1">C</option>
