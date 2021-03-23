@@ -60,10 +60,10 @@ function vote(app = app) {
 }
 
 function updateVote(res) {
-  if(res.err) {
+  if(res.data.err) {
     return;
   }
 
-  app.hasVoted = true;
-  app.tier = res.data.newRating;
+  app.daily.hasVoted = true;
+  app.daily.tier = res.data.newRating;
 }

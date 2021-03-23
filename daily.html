@@ -54,7 +54,7 @@
         </span> tier
       </div>
 
-      <div>
+      <div v-show="!daily.hasVoted">
         <span 
           class="vote-btn btn-main"
           @click="vote">
