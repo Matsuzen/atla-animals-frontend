@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000/"/* "https://atla-animals.herokuapp.com/" */;
+const baseUrl = /* "http://localhost:3000/" */"https://atla-animals.herokuapp.com/";
 
 axios.defaults.baseURL = baseUrl;
 
