@@ -58,9 +58,14 @@
         <span 
           class="vote-btn btn-main"
           @click="vote">
-          Vote
+          {{ daily.confirmVote ? "Confirm?" : "Vote"}}
         </span>
-        <select v-model="daily.selectedTier" class="rating-selector" name="animal-rating">
+        <select 
+          class="rating-selector" 
+          name="animal-rating"
+          v-model="daily.selectedTier"
+          @change="daily.confirmVote = false">
+          
           <option value="4" selected >S</option>
           <option value="3">A</option>
           <option value="2">B</option>

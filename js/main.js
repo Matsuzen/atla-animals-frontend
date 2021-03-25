@@ -1,4 +1,4 @@
-const baseUrl = /* "http://localhost:3000/" */"https://atla-animals.herokuapp.com/";
+const baseUrl = "http://localhost:3000/"/* "https://atla-animals.herokuapp.com/" */;
 
 axios.defaults.baseURL = baseUrl;
 
@@ -11,11 +11,18 @@ const app = new Vue({
       date: "",
       name: "",
       tier: "",
-      imgSrc: ""
+      imgSrc: "",
+      confirmVote: false
     },
   },
   methods: {
-    vote: function() { vote(app) }
+    vote: function() {
+      if(!this.daily.confirmVote) {
+        this.daily.confirmVote = true;
+      } else {
+        vote(app) 
+      }
+    }
   },
   mounted: function() {
     fetchDailyInfo()
@@ -60,6 +67,7 @@ function vote(app = app) {
 }
 
 function updateVote(res) {
+  console.log(res.data);
   if(res.data.err) {
     return;
   }
