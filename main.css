@@ -24,6 +24,8 @@ body {
 }
 
 .daily-container {
+  display: flex;
+  justify-content: center;
   /* border-radius: 16px; */
   margin: 4rem 0;
   width: 100%;

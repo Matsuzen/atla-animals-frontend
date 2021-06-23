@@ -24,7 +24,7 @@
 
     <div class="daily-container">
       <img
-        :src="daily.imgSrc"
+        :src="!daily.loader ? daily.imgSrc : 'loader.gif'"
         alt="Avatar Animal"
         class="daily-animal">
     </div>
@@ -37,8 +37,7 @@
 
       <div class="daily-animal-name">
         <span 
-          class="bold underline"
-          >
+          class="bold underline">
           {{ daily.name }}
         </span>
       </div>

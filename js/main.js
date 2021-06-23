@@ -12,7 +12,8 @@ const app = new Vue({
       name: "",
       tier: "",
       imgSrc: "",
-      confirmVote: false
+      confirmVote: false,
+      loader: true
     },
   },
   methods: {
@@ -53,6 +54,8 @@ function updateDaily(res, app) {
   for(const prop in daily) {
     app.daily[prop] = daily[prop];
   }
+
+  app.daily.loader = false;
 
 }
 
